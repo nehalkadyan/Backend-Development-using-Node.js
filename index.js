@@ -7,6 +7,7 @@ const apiRouter = require("./routes/firstApi");
 // auth route
 
 const authRouter = require("./routes/auth.routes");
+const userRouter = require("./routes/user.route");
 
 // connect to db
 
@@ -24,6 +25,8 @@ mongoose
 app.use("/api", apiRouter); // now we are using the api router in this
 
 app.use("/api/auth", authRouter);
+
+app.use("/allusers", userRouter);
 
 // api testing route
 
