@@ -2,6 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 
+const dotenv = require("dotenv");
+
+dotenv.config()
+
 // import router
 const apiRouter = require("./routes/firstApi");
 // auth route
@@ -12,14 +16,13 @@ const userRouter = require("./routes/user.route");
 // connect to db
 
 //  middleware to parse data to json
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log("Connected to DB"))
+.catch(err => console.log(err))
 
 app.use(express.json()); // parse data coming from frontend into json format
 
-mongoose
-  .connect(
-    "mongodb+srv://kadyannehal333_db_user:6mtmOA0TvR3kZ1Z9@cluster0.kehab7j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
-  .then(() => console.log("Connected to DB"));
+
 
 //api endpoint
 app.use("/api", apiRouter); // now we are using the api router in this
@@ -34,8 +37,8 @@ app.use("/allusers", userRouter);
 //     return res.send("<h1>Hello from our server</h1>")
 // })
 
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
+app.listen(5001, () => {
+  console.log("Server is running on port 5001");
 });
 
-// 6mtmOA0TvR3kZ1Z9
+
